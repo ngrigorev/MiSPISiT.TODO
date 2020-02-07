@@ -1,15 +1,15 @@
 exports.Task = class {
     /**
-     * @param {String} title 
-     * @param {Date} start 
-     * @param {Date} end 
-     * @param {String} status 
+     * @param {String} title title
+     * @param {Date} start start date
+     * @param {Date} end end date
+     * @param {String} status status
      */
     constructor(title, start, end, status){
         this.title = title || '';
         this.startDate = start || new Date();
         this.endDate = end || new Date();
-        this.status = !!status;
+        this.status = status || '';
     }
 }
 

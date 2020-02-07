@@ -39,8 +39,9 @@ block content
                         th Actions
                 tbody
                     - var className = ''
+
                     each item in tasks
-                        if item.Status == 'Finished'
+                        if item.status == 'Finished'
                             - className = 'task-success'
                         else if item.status == 'In work'
                             - className = 'task-no-success'

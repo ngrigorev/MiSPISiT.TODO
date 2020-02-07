@@ -38,17 +38,23 @@ block content
                         th Status
                         th Actions
                 tbody
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                        td
-                    tr
-                        td
-                        td
-                        td
-                        td
-                        td
-                        td
+                    - var className = ''
+                    each item in tasks
+                        if item.Status == 'Finished'
+                            - className = 'task-success'
+                        else if item.status == 'In work'
+                            - className = 'task-no-success'
+                        else 
+                            - className = ''
+
+                        tr(class=className)
+                            td
+                            td.name.box
+                                span #{item.title}
+                            td #{item.startDate.toLocaleDateString()}
+                            td #{item.endDate.toLocaleDateString()}
+                            td #{item.status}
+                            td
+                                div
+                                    a.btn.btn-secondary.btn-lg(href="#") &#9998;
+                                    a.btn.btn-secondary.btn-lg(href="#") &#128465;

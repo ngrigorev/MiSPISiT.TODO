@@ -6,9 +6,11 @@ exports.Task = class {
      * @param {String} status status
      */
     constructor(title, start, end, status){
+        let dateNow = new Date().toISOString().split('T')[0];
+
         this.title = title || '';
-        this.startDate = start || new Date();
-        this.endDate = end || new Date();
+        this.startDate = start || dateNow;
+        this.endDate = end || dateNow;
         this.status = status || '';
     }
 }

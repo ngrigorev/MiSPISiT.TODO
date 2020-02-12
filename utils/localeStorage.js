@@ -1,4 +1,4 @@
-const { Task, Status } = require('../models/ViewModels');
+const { Task, Status } = require('../models');
 
 let statuses = [
     new Status('New'),

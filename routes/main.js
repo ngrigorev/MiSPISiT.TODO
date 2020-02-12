@@ -1,4 +1,4 @@
-const {Task, MainViewModel} = require( '../models/ViewModels');
+const {MainViewModel} = require( '../models');
 const db = require('../utils/localeStorage');
 
 module.exports = (r, q) => {

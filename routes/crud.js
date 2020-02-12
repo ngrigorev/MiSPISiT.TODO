@@ -1,4 +1,4 @@
-const {Task, MainViewModel} = require( '../models/ViewModels');
+const {MainViewModel} = require( '../models');
 let db = require('../utils/localeStorage');
 
 exports.get = (r, q) =>{   

@@ -1,11 +1,14 @@
+class Status {
+    static count = 1;
+    constructor(name){
+        this.id = Status.count++;
+        this.name = name;
+    }
+}
+exports.Status = Status;
+
 class Task {
     static count = 1;
-    /**
-     * @param {String} title title
-     * @param {Date} start start date
-     * @param {Date} end end date
-     * @param {String} status status
-     */
     constructor(title, start, end, status){
         let dateNow = new Date().toISOString().split('T')[0];
 
@@ -18,21 +21,7 @@ class Task {
 }
 exports.Task = Task;
 
-class Status {
-    static count = 1;
-    constructor(name){
-        this.id = Status.count++;
-        this.name = name;
-    }
-}
-exports.Status = Status;
-
 exports.MainViewModel = class {
-    /**
-     * @param {String} title Title
-     * @param {Array<Task>} tasks Array of Tasks
-     * @param {Task} editItem Task to edit
-     */
     constructor(title, tasks, statuses, editItem){
         this.title = title || '';
         this.tasks = tasks || [];

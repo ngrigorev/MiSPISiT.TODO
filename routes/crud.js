@@ -1,19 +1,29 @@
 const {MainViewModel} = require( '../models');
-let db = require('../utils/localeStorage');
+let db = require('../utils/sqlitedb');
 
 exports.get = (r, q) =>{   
-    var item = db.getTasks(+r.params.id);
-    if(item){
-        let model = new MainViewModel('TODO LIST', db.getTasks(), db.getStatuses(), item);
-        return q.render('index', model);
-    }
-    q.redirect('/');
+    db.getTasks(+r.params.id).then(item => {
+        if(item) {
+            console.log(item);
+            db.getTasks().then(tasks => {
+                db.getStatuses().then(statuses => {
+                    let model = new MainViewModel('TODO LIST', tasks, statuses, item);
+                    q.render('index', model);
+                });
+            });
+        } else {
+            q.redirect('/');
+        }
+    }); 
 }
 
 exports.add = (r, q) =>{   
-    r.body.status = db.getStatuses(+r.body.status);
-    db.addTask(r.body);
-    q.redirect('/');
+    db.getStatuses(+r.body.status).then(status => {
+        r.body.status = status;
+        db.addTask(r.body).then(x => { 
+            q.redirect('/');
+        });
+    });
 }
 
 exports.update = (r, q) => {

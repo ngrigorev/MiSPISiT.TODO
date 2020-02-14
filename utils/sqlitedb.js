@@ -106,10 +106,9 @@ exports.updateTask = function(task) {
             task.title || '',
             task.startDate || dateNow,
             task.endDate || dateNow,
-            task.status.id || null,
+            task.status.id || 1,
             task.id,
         ];
-        console.log(params);
         connection().run(query, params, (err, result) => {
             if (err) reject(err);
             else resolve(result);

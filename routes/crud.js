@@ -28,12 +28,16 @@ exports.add = (r, q) =>{
 
 exports.update = (r, q) => {
     r.body.id = +r.body.id;
-    r.body.status = db.getStatuses(+r.body.status);
-    db.updateTask(r.body);
-    q.redirect('/');
+    db.getStatuses(+r.body.status).then(x => {
+        r.body.status = x;
+        db.updateTask(r.body).then(y => {
+            q.redirect('/');
+        });
+    }); 
 };
 
 exports.delete = (r, q) => {
-    db.removeTask(+r.params.id);
-    q.redirect('/');
+    db.removeTask(+r.params.id).then(x => {
+        q.redirect('/');
+    });
 };

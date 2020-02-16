@@ -15,7 +15,7 @@ exports.get = (r, q) =>{
             q.redirect('/');
         }
     }); 
-}
+};
 
 exports.add = (r, q) =>{   
     db.getStatuses(+r.body.status).then(status => {
@@ -24,7 +24,7 @@ exports.add = (r, q) =>{
             q.redirect('/');
         });
     });
-}
+};
 
 exports.update = (r, q) => {
     r.body.id = +r.body.id;

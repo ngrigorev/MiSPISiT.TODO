@@ -140,12 +140,39 @@ exports.getLastTask = function() {
                      ORDER BY id DESC
                      LIMIT 1`;
    
-        context.all(query, (err, statuses) => {
+        context.all(query, (err, result) => {
             if (err) {
                 reject(err);
             }
             else {
                 result = result ? result[0] : null;
+                resolve(result);
+            }
+        }).close();
+    });
+}
+
+exports.getRole = function ({login, password}) {
+    return new Promise((resolve, reject) => {  
+        let context = connection();
+        let query = `SELECT TypeUser.id FROM User
+                    INNER JOIN TypeUser ON TypeUser.id = User.idTypeUser
+                    WHERE login = ? AND password = ?
+                    LIMIT 1`;
+        let params = [ login, password ];
+
+        context.all(query, params, (err, result) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                if(result && result[0]){
+                    result = result[0].id == 1  
+                            ? 'User'
+                            : (result[0].id == 2 ? 'Admin' : null);
+                } else{
+                    result = null;
+                }
                 resolve(result);
             }
         }).close();

@@ -29,3 +29,11 @@ exports.MainViewModel = class {
         this.editItem = editItem || null;
     }
 }
+
+exports.User = class {
+    constructor(ip, login, password) {
+        this.ip = ip;
+        this.login = login;
+        this.password = password;
+    }
+}

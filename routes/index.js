@@ -10,10 +10,9 @@ router.post('/update', crud.update);
 router.get('/delete/:id', crud.delete);
 
 router.get('/api', api.info);
-router.get('/api/tasks', api.get);
-router.get('/api/tasks/:id', api.get);
-router.post('/api/tasks', api.add);
-router.put('/api/tasks', api.update);
-router.delete('/api/tasks/:id', api.delete);
+router.get('/api/tasks', api.login, api.get);
+router.post('/api/tasks', api.login, api.add);
+router.put('/api/tasks', api.login, api.update);
+router.delete('/api/tasks', api.login, api.delete);
 
 module.exports = router;

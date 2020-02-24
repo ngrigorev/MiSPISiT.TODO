@@ -4,7 +4,7 @@ exports.info = (r, q) => {
     q.render('api');
 };
 
-exports.login = (r, q, next) =>{
+exports.auth = (r, q, next) =>{
     db.getRole(r.query).then(role => {
         r.isAdmin = role === 'Admin';
         r.isUser = role === 'Admin' || role === 'User';
@@ -12,8 +12,7 @@ exports.login = (r, q, next) =>{
             next();
         }
         else {
-            q.status(401)
-             .json('Login or password is incorrect');
+            q.status(401).json('Login or password is incorrect');
         }
     });
 };

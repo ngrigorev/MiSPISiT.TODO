@@ -14,15 +14,13 @@ exports.auth = (r, q, next) =>{
         else {
             q.status(401).json('Login or password is incorrect');
         }
-    });
+    }).catch(x => q.status(500).json(x));
 };
 
-exports.get = (r, q) =>{   
-    if(r.isUser){
-        db.getTasks(+r.query.id).then(item => {
-            q.json(item || {});
-        });
-    }
+exports.get = (r, q) => {
+    db.getTasks(+r.query.id).then(item => {
+        q.json(item || {});
+    }).catch(x => q.status(500).json(x));
 };
 
 exports.add = (r, q) =>{   
@@ -32,9 +30,11 @@ exports.add = (r, q) =>{
             db.addTask(r.body).then(x => {
                 db.getLastTask().then(task => {
                     q.json(task);
-                });
-            });
-        });
+                }).catch(x => q.status(500).json(x));
+            }).catch(x => q.status(500).json(x));
+        }).catch(x => q.status(500).json(x));
+    } else {
+        q.status(403).json('User does not have rights');
     }
 };
 
@@ -46,9 +46,11 @@ exports.update = (r, q) => {
             db.updateTask(r.body).then(y => {
                 db.getTasks(r.body.id).then(task => {
                     q.json(task);
-                });
-            });
-        }); 
+                }).catch(x => q.status(500).json(x));
+            }).catch(x => q.status(500).json(x));
+        }).catch(x => q.status(500).json(x));
+    } else {
+        q.status(403).json('User does not have rights');
     }
 };
 
@@ -57,7 +59,9 @@ exports.delete = (r, q) => {
         db.getTasks(+r.query.id).then(task => {
             db.removeTask(+r.query.id).then(x => {
                 q.json(task);
-            })
-        });
+            }).catch(x => q.status(500).json(x));
+        }).catch(x => q.status(500).json(x));
+    } else {
+        q.status(403).json('User does not have rights');
     }
 };

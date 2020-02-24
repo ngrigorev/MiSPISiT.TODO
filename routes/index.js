@@ -1,6 +1,4 @@
 const router = require('express').Router();
-const main = require('./main');
-const crud = require('./crud');
 const api = require('./api');
 
 router.get('/', (r, q) => {
@@ -8,9 +6,9 @@ router.get('/', (r, q) => {
 });
 
 router.get('/api', api.info);
-router.get('/api/tasks', api.login, api.get);
-router.post('/api/tasks', api.login, api.add);
-router.put('/api/tasks', api.login, api.update);
-router.delete('/api/tasks', api.login, api.delete);
+router.get('/api/tasks', api.auth, api.get);
+router.post('/api/tasks', api.auth, api.add);
+router.put('/api/tasks', api.auth, api.update);
+router.delete('/api/tasks', api.auth, api.delete);
 
 module.exports = router;

@@ -29,10 +29,10 @@ block content
                         p [ { id, name, dateStart, dateEnd, status: { id, name } } ]
                 tr
                     td 
-                    td Get all tasks
+                    td Get task by id
                     td GET
                     td 
-                        a(href="/api/tasks?{id}") /api/tasks?{id}
+                        a(href="/api/tasks?id=") /api/tasks?{id}
                     td JSON for Request
                         p id
                     td JSON RESULT
@@ -59,7 +59,7 @@ block content
                     td 
                     td Delete task
                     td DELETE
-                    td /api/tasks?{id}
+                    td /api/tasks?id=
                     td JSON for Request
                         p id
                     td JSON RESULT
